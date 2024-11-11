@@ -1,13 +1,13 @@
 import Message from "./Message";
 import Preloader from "./Preloader";
-import { cartSelector, orderSelector } from "../selectors";
-import { changeOrderFormInput, fetchOrder } from "../actions/actionCreators";
+import { changeOrderFormInput, fetchOrder, selectOrder } from "../slices/order";
+import { selectCartItems } from "../slices/cart";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Order() {
   const dispatch = useDispatch();
-  const { error, form, loading, success } = useSelector(orderSelector);
-  const { items } = useSelector(cartSelector);
+  const items = useSelector(selectCartItems);
+  const { error, form, loading, success } = useSelector(selectOrder);
 
   const btnDisabled = !(form.address && form.agreement && form.phone && items.length);
   const successMessage = success ? "Ваш заказ отправлен" : null;
@@ -16,17 +16,17 @@ export default function Order() {
     const { id: name, value } = event.currentTarget;
 
     if (name === "agreement") {
-      dispatch(changeOrderFormInput(name, !form.agreement));
+      dispatch(changeOrderFormInput({ name, value: !form.agreement }));
 
       return;
     }
 
-    dispatch(changeOrderFormInput(name, value));
+    dispatch(changeOrderFormInput({ name, value }));
   };
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    dispatch(fetchOrder(items, form));
+    dispatch(fetchOrder({ items, form }));
   };
 
   return (

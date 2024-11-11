@@ -1,12 +1,11 @@
 import Paths from "../paths";
-import { cartSelector } from "../selectors";
 import { Link } from "react-router-dom";
-import { setCartItems } from "../actions/actionCreators";
+import { selectCartItems, setCartItems } from "../slices/cart";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Cart() {
   const dispatch = useDispatch();
-  const { items } = useSelector(cartSelector);
+  const items = useSelector(selectCartItems);
 
   const totalAmount = items.reduce((acc, item) => acc + item.total, 0);
 

@@ -1,11 +1,10 @@
 import PropTypes from "prop-types";
-import { fetchProducts } from "../../actions/actionCreators";
-import { productsSelector } from "../../selectors";
+import { fetchProducts, selectProductsLoading } from "../../slices/products";
 import { useDispatch, useSelector } from "react-redux";
 
 function LoadBtn({ items }) {
   const dispatch = useDispatch();
-  const { loading } = useSelector(productsSelector);
+  const loading = useSelector(selectProductsLoading);
 
   const loadBtnVisible = !loading && (items.length % 6 === 0);
 

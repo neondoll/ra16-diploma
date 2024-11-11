@@ -1,16 +1,16 @@
 import Paths from "../paths";
 import ProductView from "../components/ProductView";
-import { cartSelector, productSelector } from "../selectors";
-import { fetchProduct, setCartItems } from "../actions/actionCreators";
+import { fetchProduct, selectProduct } from "../slices/product";
 import { redirect, useParams } from "react-router-dom";
+import { selectCartItems, setCartItems } from "../slices/cart";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 export default function Product() {
+  const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
-  const { error, item, loading } = useSelector(productSelector);
+  const { error, item, loading } = useSelector(selectProduct);
   const { id } = useParams();
-  const { items: cartItems } = useSelector(cartSelector);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
 

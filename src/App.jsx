@@ -2,7 +2,7 @@ import Layout from "./Layout";
 import Paths from "./paths";
 import { About, Cart, Catalog, Contacts, NotFound, Product, Root } from "./routes";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { restoreCart } from "./actions/actionCreators";
+import { restoreCart } from "./slices/cart";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 

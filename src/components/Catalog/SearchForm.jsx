@@ -1,14 +1,13 @@
 import PropTypes from "prop-types";
 import { debounce } from "lodash";
-import { fetchProducts, setProductQuery } from "../../actions/actionCreators";
-import { productsSelector } from "../../selectors";
+import { fetchProducts, selectProductsQuery, setProductQuery } from "../../slices/products";
 import { useDispatch, useSelector } from "react-redux";
 
 const debounceFetchProducts = debounce(dispatch => dispatch(fetchProducts(0)), 500);
 
 function SearchForm({ show }) {
   const dispatch = useDispatch();
-  const { query } = useSelector(productsSelector);
+  const query = useSelector(selectProductsQuery);
 
   const handleChange = (event) => {
     dispatch(setProductQuery(event.target.value));

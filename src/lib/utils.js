@@ -15,20 +15,17 @@ export function getResponseError(error) {
     return error.message;
   }
 
-  if (
-    Object.prototype.hasOwnProperty.call(error, "response")
-    && Object.prototype.hasOwnProperty.call(error.response, "data")
-  ) {
-    if (Object.prototype.hasOwnProperty.call(error.response.data, "errors")) {
+  if (Object.hasOwn(error, "response") && Object.hasOwn(error.response, "data")) {
+    if (Object.hasOwn(error.response.data, "errors")) {
       return error.response.data.errors;
     }
 
-    if (Object.prototype.hasOwnProperty.call(error.response.data, "message")) {
+    if (Object.hasOwn(error.response.data, "message")) {
       return error.response.data.message;
     }
   }
 
-  if (Object.prototype.hasOwnProperty.call(error, "message")) {
+  if (Object.hasOwn(error, "message")) {
     return error.message;
   }
 

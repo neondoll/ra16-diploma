@@ -1,12 +1,11 @@
 import Cards from "./Cards";
-import { fetchTopSales } from "../actions/actionCreators";
-import { topSalesSelector } from "../selectors";
+import { fetchTopSales, selectTopSales } from "../slices/topSales";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 export default function TopSales() {
   const dispatch = useDispatch();
-  const { error, items, loading } = useSelector(topSalesSelector);
+  const { error, items, loading } = useSelector(selectTopSales);
 
   useEffect(() => {
     dispatch(fetchTopSales());

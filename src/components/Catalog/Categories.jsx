@@ -1,13 +1,13 @@
 import Message from "../Message";
 import Preloader from "../Preloader";
-import { categoriesSelector } from "../../selectors";
 import { cn } from "../../lib/utils";
-import { fetchProducts, setCurrentCategoryId } from "../../actions/actionCreators";
+import { fetchProducts } from "../../slices/products";
+import { selectCategories, setCurrentCategoryId } from "../../slices/categories";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Categories() {
   const dispatch = useDispatch();
-  const selector = useSelector(categoriesSelector);
+  const selector = useSelector(selectCategories);
 
   const items = [{ id: null, title: "Все" }, ...selector.items];
   const { current, error, loading } = selector;

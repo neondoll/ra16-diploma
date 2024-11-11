@@ -1,17 +1,17 @@
 import headerLogo from "../../assets/header-logo.png";
 import Nav from "./Nav";
 import Paths from "../../paths";
-import { cartSelector } from "../../selectors";
 import { cn } from "../../lib/utils";
 import { NavLink, useNavigate } from "react-router-dom";
-import { searchProducts } from "../../actions/actionCreators";
+import { searchProducts } from "../../slices/products";
+import { selectCartItemsCount } from "../../slices/cart";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 export default function Header() {
+  const cartItemsCount = useSelector(selectCartItemsCount);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { itemsCount: cartItemsCount } = useSelector(cartSelector);
   const [searchFormInputValue, setSearchFormInputValue] = useState("");
   const [searchFormInvisible, setSearchFormInvisible] = useState(true);
 
